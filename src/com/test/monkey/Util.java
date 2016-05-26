@@ -1,17 +1,14 @@
 package com.test.monkey;
 
-import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-
 public class Util {
 	
-	int i, n;
+	private static int i, n;
 	
 	public static ArrayList<String> getDeviceID(){
 		ArrayList<String> ids = new ArrayList<String>();
@@ -32,6 +29,30 @@ public class Util {
 			e.printStackTrace();
 		}
 		return ids;
+	}
+	
+	public static void startMonkey(){
+		final ArrayList<String> ids = Util.getDeviceID();
+		for (i = 0, n = 0; i < ids.size(); i++) {
+			new Thread() {
+				public void run() {
+					try {
+						String command = "adb -s " + ids.get(n++) + " shell monkey -s 100 --throttle 500 --ignore-crashes --ignore-timeouts --ignore-security-exceptions -v -v -v " + Frame.textField.getText();
+						Frame.textArea.append(command+"\n");
+						Process process = Runtime.getRuntime().exec("cmd /c "+command);
+						InputStream inputStream = process.getInputStream();
+						InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+						BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+						String line;
+						while((line=bufferedReader.readLine()) != null){
+						}
+						bufferedReader.close();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}.start();
+		}
 	}
 	
 	public static void stopMonkey(){

@@ -1,35 +1,24 @@
 package com.test.monkey;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.FlowLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-import javax.swing.JMenu;
 import javax.swing.JComboBox;
-import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 
 public class Frame extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	public static JTextField textField;
 	public static JTextArea textArea;
 
 	public static void main(String[] args) {
@@ -68,27 +57,7 @@ public class Frame extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			int i, n;
 			public void actionPerformed(ActionEvent e) {
-				final ArrayList<String> ids = Util.getDeviceID();
-				for (i = 0, n = 0; i < ids.size(); i++) {
-					new Thread() {
-						public void run() {
-							try {
-								String command = "adb -s " + ids.get(n++) + " shell monkey -s 100 --throttle 500 --ignore-crashes --ignore-timeouts --ignore-security-exceptions -v -v -v " + textField.getText();
-								textArea.append(command+"\n");
-								Process process = Runtime.getRuntime().exec("cmd /c "+command);
-								InputStream inputStream = process.getInputStream();
-								InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-								BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-								String line;
-								while((line=bufferedReader.readLine()) != null){
-								}
-								bufferedReader.close();
-							} catch (IOException e1) {
-								e1.printStackTrace();
-							}
-						}
-					}.start();
-				}
+				Util.startMonkey();
 			}
 		});
 		btnNewButton.setBounds(0, 47, 100, 50);

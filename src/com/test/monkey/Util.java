@@ -32,7 +32,7 @@ public class Util {
 	}
 	
 	public static void startMonkey(){
-		final ArrayList<String> ids = Util.getDeviceID();
+		final ArrayList<String> ids = getDeviceID();
 		for (i = 0, n = 0; i < ids.size(); i++) {
 			new Thread() {
 				public void run() {

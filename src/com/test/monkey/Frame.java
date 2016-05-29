@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -14,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class Frame extends JFrame {
 
@@ -27,6 +30,7 @@ public class Frame extends JFrame {
 				try {
 					Frame frame = new Frame();
 					frame.setVisible(true);
+					new Init();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,7 +59,6 @@ public class Frame extends JFrame {
 		JButton btnNewButton = new JButton("START");
 		btnNewButton.setToolTipText("");
 		btnNewButton.addActionListener(new ActionListener() {
-			int i, n;
 			public void actionPerformed(ActionEvent e) {
 				Util.startMonkey();
 			}
@@ -75,25 +78,26 @@ public class Frame extends JFrame {
 		contentPane.add(textField);
 		textField.setColumns(10);
 
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(942, 22, 17, 496);
-		contentPane.add(scrollBar);
-
 		JButton btnStop = new JButton("STOP");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Util.stopMonkey();
+				new Util.StopMonkey().start();
 			}
 		});
 		btnStop.setBounds(0, 107, 100, 50);
 		contentPane.add(btnStop);
-
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBounds(129, 22, 837, 498);
+		contentPane.add(scrollPane);
+		
 		textArea = new JTextArea();
+		textArea.setEditable(false);
 		textArea.setWrapStyleWord(true);
 		textArea.setLineWrap(true);
-		textArea.setEditable(false);
-		textArea.setBounds(124, 22, 835, 496);
-		contentPane.add(textArea);
+		scrollPane.setViewportView(textArea);
 	}
 }
 

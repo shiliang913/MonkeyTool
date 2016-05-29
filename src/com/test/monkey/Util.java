@@ -24,7 +24,7 @@ public class Util {
 	public static ArrayList<String> getDeviceID(){
 		ArrayList<String> ids = new ArrayList<String>();
 		try {
-			Process process = Runtime.getRuntime().exec("cmd /c adb devices");
+			Process process = Runtime.getRuntime().exec(Init.adb + " devices");
 			InputStream inputStream = process.getInputStream();
 			InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -54,10 +54,10 @@ public class Util {
 				}
 				final ArrayList<String> ids = getDeviceID();
 				for (int i = 0; i < ids.size(); i++) {
-					final String command = "adb -s " + ids.get(i) + " shell monkey -s 100 -p com.android.settings --throttle 100 "
+					String command = Init.adb + " -s " + ids.get(i) + " shell monkey -s 100 --throttle 500 "
 							+ "--ignore-crashes --ignore-timeouts --ignore-security-exceptions -v -v -v "
 							+ Frame.textField.getText();
-					Frame.textArea.append(command + "\n");
+					Frame.textArea.append(command.replace(Init.adb, "adb") + "\n");
 					new Report(command).start();
 				}
 			}
@@ -69,7 +69,7 @@ public class Util {
 			ArrayList<String> devices = getDeviceID();
 			for (int i = 0; i < devices.size(); i++) {
 				try {
-					Process process = Runtime.getRuntime().exec("cmd /c adb -s " + devices.get(i) +" shell ps | findstr monkey");
+					Process process = Runtime.getRuntime().exec(Init.adb + " -s " + devices.get(i) +" shell ps | " + Init.find +" monkey");
 					InputStream inputStream = process.getInputStream();
 					InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 					BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -77,9 +77,9 @@ public class Util {
 					if(line != null){
 						line = line.replace("shell","").trim();
 						int end = line.indexOf(" ");
-						String command = "adb -s " + devices.get(i) +" shell kill " + line.substring(0,end);
-						Frame.textArea.append(command+"\n");
-						Runtime.getRuntime().exec("cmd /c " + command);
+						String command = Init.adb + " -s " + devices.get(i) +" shell kill " + line.substring(0,end);
+						Frame.textArea.append(command.replace(Init.adb, "adb") + "\n");
+						Runtime.getRuntime().exec(command);
 					}
 					bufferedReader.close();
 				} catch (IOException e) {

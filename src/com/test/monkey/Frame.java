@@ -8,6 +8,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -17,6 +18,9 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.JList;
+import javax.swing.JCheckBox;
+import javax.swing.JTable;
 
 public class Frame extends JFrame {
 
@@ -68,13 +72,13 @@ public class Frame extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("Times");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(0, 219, 100, 30);
+		lblNewLabel.setBounds(0, 196, 100, 30);
 		contentPane.add(lblNewLabel);
 
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setText("100000");
-		textField.setBounds(0, 250, 100, 30);
+		textField.setBounds(0, 227, 100, 30);
 		contentPane.add(textField);
 		textField.setColumns(10);
 
@@ -90,7 +94,7 @@ public class Frame extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(129, 22, 837, 498);
+		scrollPane.setBounds(173, 22, 793, 486);
 		contentPane.add(scrollPane);
 		
 		textArea = new JTextArea();
@@ -98,6 +102,20 @@ public class Frame extends JFrame {
 		textArea.setWrapStyleWord(true);
 		textArea.setLineWrap(true);
 		scrollPane.setViewportView(textArea);
+		
+		JButton btnClear = new JButton("CLEAR");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textArea.setText("");
+			}
+		});
+		btnClear.setBounds(866, 520, 100, 30);
+		contentPane.add(btnClear);
+		
+		JLabel lblPackages = new JLabel("Packages");
+		lblPackages.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPackages.setBounds(0, 285, 100, 30);
+		contentPane.add(lblPackages);
 	}
 }
 

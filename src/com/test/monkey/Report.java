@@ -15,14 +15,14 @@ public class Report extends Thread {
 	
 	public Report(String command) {
 		this.command = command;
-		deviceId = command.substring(7);
+		deviceId = command.replace(Init.adb, "adb").substring(7);
 		deviceId = deviceId.substring(0, deviceId.indexOf(" "));
 	}
 	
 	@Override
 	public void run() {
 		try {
-			Process process = Runtime.getRuntime().exec("cmd /c " + command);
+			Process process = Runtime.getRuntime().exec(command);
 			InputStream inputStream = process.getInputStream();
 			InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);

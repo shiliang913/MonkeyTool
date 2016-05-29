@@ -54,7 +54,7 @@ public class Util {
 				}
 				final ArrayList<String> ids = getDeviceID();
 				for (int i = 0; i < ids.size(); i++) {
-					final String command = "adb -s " + ids.get(i) + " shell monkey -s 100 --throttle 500 "
+					final String command = "adb -s " + ids.get(i) + " shell monkey -s 100 -p com.android.settings --throttle 100 "
 							+ "--ignore-crashes --ignore-timeouts --ignore-security-exceptions -v -v -v "
 							+ Frame.textField.getText();
 					Frame.textArea.append(command + "\n");

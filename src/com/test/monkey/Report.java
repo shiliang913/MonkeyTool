@@ -32,6 +32,8 @@ public class Report extends Thread {
 			BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
+				if(line.contains("CRASH") || line.contains("ANR"))
+					Frame.textArea.append(deviceId+":"+line+"\n");
 				bufferedWriter.write(line);
 				bufferedWriter.newLine();
 			}

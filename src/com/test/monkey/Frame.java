@@ -125,7 +125,7 @@ public class Frame extends JFrame {
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane_1.setBounds(10, 290, 237, 251);
 		contentPane.add(scrollPane_1);
-		scrollPane_1.setViewportView(new PackageList(PackageList.getPackages()));
+		scrollPane_1.setViewportView(new PackageList());
 	}
 	
 }

@@ -34,7 +34,7 @@ public class MyJList extends JFrame {
 	protected JList m_list; 
 	protected JLabel m_total; 
 
-	public MyJList() { 
+	public MyJList() {
 		super("Swing List [Check boxes]"); 
 		setSize(260, 240); 
 		getContentPane().setLayout(new FlowLayout()); 

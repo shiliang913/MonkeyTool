@@ -1,10 +1,12 @@
 package com.test.monkey;
 
+import java.awt.Component;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,6 +15,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
@@ -72,13 +75,13 @@ public class Frame extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("Times");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(0, 196, 100, 30);
+		lblNewLabel.setBounds(0, 178, 100, 30);
 		contentPane.add(lblNewLabel);
 
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setText("100000");
-		textField.setBounds(0, 227, 100, 30);
+		textField.setBounds(0, 209, 100, 30);
 		contentPane.add(textField);
 		textField.setColumns(10);
 
@@ -94,7 +97,7 @@ public class Frame extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(173, 22, 793, 486);
+		scrollPane.setBounds(279, 22, 687, 486);
 		contentPane.add(scrollPane);
 		
 		textArea = new JTextArea();
@@ -114,8 +117,16 @@ public class Frame extends JFrame {
 		
 		JLabel lblPackages = new JLabel("Packages");
 		lblPackages.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPackages.setBounds(0, 285, 100, 30);
+		lblPackages.setBounds(0, 261, 100, 30);
 		contentPane.add(lblPackages);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane_1.setBounds(10, 290, 237, 251);
+		contentPane.add(scrollPane_1);
+		scrollPane_1.setViewportView(new PackageList(PackageList.getPackages()));
 	}
+	
 }
 

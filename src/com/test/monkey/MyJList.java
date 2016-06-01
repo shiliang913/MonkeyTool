@@ -160,7 +160,7 @@ class CheckListener implements MouseListener, KeyListener {
 	public void keyReleased(KeyEvent e) { 
 	} 
 
-	protected void doCheck() { 
+	protected void doCheck() {
 		int index = m_list.getSelectedIndex(); 
 		if (index < 0) 
 			return; 

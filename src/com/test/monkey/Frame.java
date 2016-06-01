@@ -1,29 +1,21 @@
 package com.test.monkey;
 
-import java.awt.Component;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.JList;
 import javax.swing.JCheckBox;
-import javax.swing.JTable;
 
 public class Frame extends JFrame {
 
@@ -97,7 +89,7 @@ public class Frame extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(279, 22, 687, 486);
+		scrollPane.setBounds(220, 22, 746, 486);
 		contentPane.add(scrollPane);
 		
 		textArea = new JTextArea();
@@ -115,18 +107,39 @@ public class Frame extends JFrame {
 		btnClear.setBounds(866, 520, 100, 30);
 		contentPane.add(btnClear);
 		
-		JLabel lblPackages = new JLabel("Packages");
-		lblPackages.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPackages.setBounds(0, 261, 100, 30);
-		contentPane.add(lblPackages);
-		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane_1.setBounds(10, 290, 237, 251);
+		scrollPane_1.setBounds(10, 290, 187, 235);
 		contentPane.add(scrollPane_1);
-		scrollPane_1.setViewportView(new PackageList());
+		final PackageList packageList = new PackageList();
+		scrollPane_1.setViewportView(packageList);
+		
+		final JCheckBox chckbxNewCheckBox = new JCheckBox("Select packages");
+		chckbxNewCheckBox.setSelected(true);
+		chckbxNewCheckBox.setBounds(10, 261, 120, 23);
+		chckbxNewCheckBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				boolean isChecked = chckbxNewCheckBox.isSelected();
+				int pkgCount = Packages.getPkgCount();
+				for (int i = 0; i < pkgCount; i++) {
+					ListData listData = (ListData)packageList.getModel().getElementAt(i);
+					listData.setChecked(isChecked);
+				}
+				packageList.repaint();
+			}
+		});
+		contentPane.add(chckbxNewCheckBox);
+		
+		JButton btnNewButton_1 = new JButton("Refresh");
+		btnNewButton_1.setBounds(10, 524, 187, 23);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		contentPane.add(btnNewButton_1);
 	}
-	
 }
 

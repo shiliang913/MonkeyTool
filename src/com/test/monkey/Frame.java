@@ -107,7 +107,7 @@ public class Frame extends JFrame {
 		btnClear.setBounds(866, 520, 100, 30);
 		contentPane.add(btnClear);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
+		final JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane_1.setBounds(10, 290, 187, 235);
@@ -137,6 +137,7 @@ public class Frame extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				packageList.updateList();
 			}
 		});
 		contentPane.add(btnNewButton_1);

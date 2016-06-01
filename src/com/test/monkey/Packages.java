@@ -5,13 +5,13 @@ import java.util.HashMap;
 public class Packages {
 	
 	public static int pkgCount = 0;
+	static int n = 0;
 	
 	public static HashMap<String,String> getPackages(){
 		HashMap<String,String> pkgs = new HashMap<String,String>();
-		pkgs.put("com.android.camera","camera");
-		pkgs.put("com.android.camera2","camera");
-		pkgs.put("com.android.camera3","camera3");
+		pkgs.put("com.android.camera"+n,"camera");
 		pkgCount = pkgs.size();
+		n++;
 		return pkgs;
 	}
 	

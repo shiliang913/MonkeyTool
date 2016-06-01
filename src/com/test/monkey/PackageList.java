@@ -10,14 +10,21 @@ import java.util.Set;
 import javax.swing.JCheckBox;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
-import javax.swing.ListModel;
 
 public class PackageList extends JList {
 
 	static HashMap<String,String> packages;
 	static ListData[] listDatas;
 
-	static {
+	public void updateList() {
+		repaintList();
+	}
+
+	public PackageList() {
+		repaintList();
+	}
+
+	public void repaintList() {
 		packages = Packages.getPackages();
 		int n = packages.size();
 		listDatas = new ListData[n];
@@ -25,14 +32,12 @@ public class PackageList extends JList {
 		int i = 0;
 		for(String key : keys)
 			listDatas[i++] = new ListData(key);
-	}
-
-	public PackageList() {
-		super(listDatas);
+		setListData(listDatas);
 		setCellRenderer(new ListItem());
 		Listener checkListener = new Listener(this);
 		addMouseListener(checkListener);
 		addKeyListener(checkListener);
+		repaint();
 	}
 }
 
@@ -125,7 +130,7 @@ class ListData {
 	public boolean getChecked() {
 		return isChecked;
 	}
-	
+
 	public void setChecked(boolean isChecked) {
 		this.isChecked = isChecked;
 	}

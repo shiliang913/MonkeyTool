@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Util {
-	
+
 	public static String getTime(boolean isDate){
 		SimpleDateFormat simpleDateFormat = null;
 		if(isDate)
@@ -52,10 +52,15 @@ public class Util {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				ArrayList<String> pkgs = PackageList.getCheckedPkgs();
+				StringBuffer stringBuffer = new StringBuffer("");
+				for (int i = 0,n=pkgs.size(); i < n; i++) {
+					stringBuffer.append("-p " + pkgs.get(i) + " ");
+				}
 				final ArrayList<String> ids = getDeviceID();
 				for (int i = 0; i < ids.size(); i++) {
-					String command = Init.adb + " -s " + ids.get(i) + " shell monkey -s 100 --throttle 500 "
-							+ "--ignore-crashes --ignore-timeouts --ignore-security-exceptions -v -v -v "
+					String command = Init.adb + " -s " + ids.get(i) + " shell monkey --throttle 500 "
+							+ stringBuffer.toString() + "--ignore-crashes --ignore-timeouts --ignore-security-exceptions -v -v -v "
 							+ Frame.textField.getText();
 					Frame.textArea.append(command.replace(Init.adb, "adb") + "\n");
 					new Report(command).start();

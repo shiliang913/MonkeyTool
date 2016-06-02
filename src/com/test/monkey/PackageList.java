@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 import javax.swing.JCheckBox;
@@ -16,29 +17,48 @@ public class PackageList extends JList {
 	static HashMap<String,String> packages;
 	static ListData[] listDatas;
 
-	public void updateList() {
-		repaintList();
-	}
-
 	public PackageList() {
 		repaintList();
 	}
 
 	public void repaintList() {
-		packages = Packages.getPackages();
-		int n = packages.size();
-		listDatas = new ListData[n];
-		Set<String> keys = packages.keySet();
-		int i = 0;
-		for(String key : keys)
-			listDatas[i++] = new ListData(key);
-		setListData(listDatas);
-		setCellRenderer(new ListItem());
-		Listener checkListener = new Listener(this);
-		addMouseListener(checkListener);
-		addKeyListener(checkListener);
-		repaint();
+		new Thread() {
+			public void run() {
+				packages = Packages.getPackages();
+				int n = packages.size();
+				listDatas = new ListData[n];
+				Set<String> keys = packages.keySet();
+				int i = 0;
+				for (String key : keys)
+					listDatas[i++] = new ListData(key);
+				setListData(listDatas);
+				setCellRenderer(new ListItem());
+				Listener checkListener = new Listener(PackageList.this);
+				addMouseListener(checkListener);
+				addKeyListener(checkListener);
+				repaint();
+			}
+		}.start();
 	}
+	
+	public void setAllChecked(boolean isChecked){
+		for(int i=0,n=listDatas.length; i<n; i++){
+			listDatas[i].setChecked(isChecked);
+			repaint();
+		}
+	}
+	
+	public static ArrayList<String> getCheckedPkgs(){
+		ArrayList<String> pkgs = new ArrayList<String>();
+		for(int i=0,n=listDatas.length;i<n;i++){
+			if(listDatas[i].getChecked() == true)
+				pkgs.add(listDatas[i].getName());
+		}
+		if(pkgs.size() == listDatas.length)
+			return new ArrayList<String>();
+		return pkgs;
+	}
+	
 }
 
 class Listener implements MouseListener, KeyListener{
@@ -129,6 +149,10 @@ class ListData {
 
 	public boolean getChecked() {
 		return isChecked;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 	public void setChecked(boolean isChecked) {

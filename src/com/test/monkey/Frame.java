@@ -27,9 +27,9 @@ public class Frame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					new Init();
 					Frame frame = new Frame();
 					frame.setVisible(true);
-					new Init();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,11 +50,6 @@ public class Frame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setToolTipText("Choose device ID");
-		comboBox.setBounds(0, 0, 100, 30);
-		contentPane.add(comboBox);
-
 		JButton btnNewButton = new JButton("START");
 		btnNewButton.setToolTipText("");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -62,18 +57,18 @@ public class Frame extends JFrame {
 				Util.startMonkey();
 			}
 		});
-		btnNewButton.setBounds(0, 47, 100, 50);
+		btnNewButton.setBounds(32, 22, 120, 50);
 		contentPane.add(btnNewButton);
 
 		JLabel lblNewLabel = new JLabel("Times");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(0, 178, 100, 30);
+		lblNewLabel.setBounds(32, 153, 120, 30);
 		contentPane.add(lblNewLabel);
 
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setText("100000");
-		textField.setBounds(0, 209, 100, 30);
+		textField.setBounds(32, 184, 120, 30);
 		contentPane.add(textField);
 		textField.setColumns(10);
 
@@ -83,7 +78,7 @@ public class Frame extends JFrame {
 				new Util.StopMonkey().start();
 			}
 		});
-		btnStop.setBounds(0, 107, 100, 50);
+		btnStop.setBounds(32, 82, 120, 50);
 		contentPane.add(btnStop);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -110,34 +105,29 @@ public class Frame extends JFrame {
 		final JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane_1.setBounds(10, 290, 187, 235);
+		scrollPane_1.setBounds(6, 280, 200, 235);
 		contentPane.add(scrollPane_1);
 		final PackageList packageList = new PackageList();
 		scrollPane_1.setViewportView(packageList);
 		
 		final JCheckBox chckbxNewCheckBox = new JCheckBox("Select packages");
 		chckbxNewCheckBox.setSelected(true);
-		chckbxNewCheckBox.setBounds(10, 261, 120, 23);
+		chckbxNewCheckBox.setBounds(6, 251, 200, 23);
 		chckbxNewCheckBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				boolean isChecked = chckbxNewCheckBox.isSelected();
-				int pkgCount = Packages.getPkgCount();
-				for (int i = 0; i < pkgCount; i++) {
-					ListData listData = (ListData)packageList.getModel().getElementAt(i);
-					listData.setChecked(isChecked);
-				}
-				packageList.repaint();
+				packageList.setAllChecked(isChecked);
 			}
 		});
 		contentPane.add(chckbxNewCheckBox);
 		
 		JButton btnNewButton_1 = new JButton("Refresh");
-		btnNewButton_1.setBounds(10, 524, 187, 23);
+		btnNewButton_1.setBounds(6, 514, 200, 36);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				packageList.updateList();
+				packageList.repaintList();
 			}
 		});
 		contentPane.add(btnNewButton_1);

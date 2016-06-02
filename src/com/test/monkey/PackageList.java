@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Set;
 import javax.swing.JCheckBox;
 import javax.swing.JList;
+import javax.swing.JScrollBar;
 import javax.swing.ListCellRenderer;
 
 public class PackageList extends JList {
@@ -37,7 +38,7 @@ public class PackageList extends JList {
 				addMouseListener(checkListener);
 				addKeyListener(checkListener);
 				repaint();
-				Frame.textArea.append("Load packages successfully !\n");
+				Util.appendTextArea("Load packages successfully !");
 			}
 		}.start();
 	}

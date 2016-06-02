@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.ImageIcon;
@@ -23,6 +24,8 @@ public class Frame extends JFrame {
 	private JPanel contentPane;
 	public static JTextField textField;
 	public static JTextArea textArea;
+	public static JScrollPane scrollPane;
+	public static JScrollBar jScrollBar;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -82,10 +85,11 @@ public class Frame extends JFrame {
 		btnStop.setBounds(32, 82, 120, 50);
 		contentPane.add(btnStop);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(220, 21, 764, 490);
+		jScrollBar = scrollPane.getVerticalScrollBar();
 		contentPane.add(scrollPane);
 		
 		textArea = new JTextArea();

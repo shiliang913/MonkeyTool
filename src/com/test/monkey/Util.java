@@ -8,7 +8,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JScrollBar;
+
 public class Util {
+	
+	public static void appendTextArea(String content){
+		Frame.textArea.append(content + "\n");
+		Frame.jScrollBar.setValue(Frame.jScrollBar.getMaximum());
+	}
 
 	public static String getTime(boolean isDate){
 		SimpleDateFormat simpleDateFormat = null;
@@ -62,7 +69,7 @@ public class Util {
 					String command = Init.adb + " -s " + ids.get(i) + " shell monkey --throttle 500 "
 							+ stringBuffer.toString() + "--ignore-crashes --ignore-timeouts --ignore-security-exceptions -v -v -v "
 							+ Frame.textField.getText();
-					Frame.textArea.append(command.replace(Init.adb, "adb") + "\n");
+					Util.appendTextArea(command.replace(Init.adb, "adb"));
 					new Report(command).start();
 				}
 			}
@@ -83,7 +90,7 @@ public class Util {
 						line = line.replace("shell","").trim();
 						int end = line.indexOf(" ");
 						String command = Init.adb + " -s " + devices.get(i) +" shell kill " + line.substring(0,end);
-						Frame.textArea.append(command.replace(Init.adb, "adb") + "\n");
+						Util.appendTextArea(command.replace(Init.adb, "adb"));
 						Runtime.getRuntime().exec(command);
 					}
 					bufferedReader.close();

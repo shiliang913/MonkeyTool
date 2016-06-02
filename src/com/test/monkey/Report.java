@@ -33,7 +33,7 @@ public class Report extends Thread {
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
 				if(line.contains("CRASH") || line.contains("ANR"))
-					Frame.textArea.append(deviceId+":"+line+"\n");
+					Util.appendTextArea(deviceId+":"+line);
 				bufferedWriter.write(line);
 				bufferedWriter.newLine();
 			}

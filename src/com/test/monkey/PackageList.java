@@ -37,6 +37,7 @@ public class PackageList extends JList {
 				addMouseListener(checkListener);
 				addKeyListener(checkListener);
 				repaint();
+				Frame.textArea.append("Load packages successfully !\n");
 			}
 		}.start();
 	}

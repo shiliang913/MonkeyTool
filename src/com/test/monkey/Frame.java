@@ -1,14 +1,15 @@
 package com.test.monkey;
 
 import java.awt.EventQueue;
+import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -84,7 +85,7 @@ public class Frame extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(220, 22, 746, 486);
+		scrollPane.setBounds(220, 21, 764, 490);
 		contentPane.add(scrollPane);
 		
 		textArea = new JTextArea();
@@ -99,20 +100,20 @@ public class Frame extends JFrame {
 				textArea.setText("");
 			}
 		});
-		btnClear.setBounds(866, 520, 100, 30);
+		btnClear.setBounds(866, 521, 100, 30);
 		contentPane.add(btnClear);
 		
 		final JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane_1.setBounds(6, 280, 200, 235);
+		scrollPane_1.setBounds(6, 280, 204, 271);
 		contentPane.add(scrollPane_1);
 		final PackageList packageList = new PackageList();
 		scrollPane_1.setViewportView(packageList);
 		
 		final JCheckBox chckbxNewCheckBox = new JCheckBox("Select packages");
 		chckbxNewCheckBox.setSelected(true);
-		chckbxNewCheckBox.setBounds(6, 251, 200, 23);
+		chckbxNewCheckBox.setBounds(6, 251, 163, 23);
 		chckbxNewCheckBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -122,8 +123,12 @@ public class Frame extends JFrame {
 		});
 		contentPane.add(chckbxNewCheckBox);
 		
-		JButton btnNewButton_1 = new JButton("Refresh");
-		btnNewButton_1.setBounds(6, 514, 200, 36);
+		ImageIcon icon = new ImageIcon("refresh.png");
+		Image image = icon.getImage().getScaledInstance(30,30,Image.SCALE_DEFAULT);
+		icon.setImage(image);
+		JButton btnNewButton_1 = new JButton(icon);
+		btnNewButton_1.setBorderPainted(false);
+		btnNewButton_1.setBounds(180, 244, 30, 30);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

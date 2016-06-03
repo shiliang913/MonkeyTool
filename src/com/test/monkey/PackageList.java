@@ -25,6 +25,7 @@ public class PackageList extends JList {
 	public void repaintList() {
 		new Thread() {
 			public void run() {
+				Util.appendTextArea("Loading packages, please wait......");
 				packages = Packages.getPackages();
 				int n = packages.size();
 				listDatas = new ListData[n];

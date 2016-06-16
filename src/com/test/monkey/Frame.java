@@ -1,5 +1,6 @@
 package com.test.monkey;
 
+import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Image;
 import javax.swing.JFrame;
@@ -10,6 +11,8 @@ import javax.swing.JMenuBar;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -140,6 +143,19 @@ public class Frame extends JFrame {
 			}
 		});
 		contentPane.add(btnNewButton_1);
+		
+		JButton btnMonkeyLogs = new JButton("Monkey logs");
+		btnMonkeyLogs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Desktop.getDesktop().open(new File("D:\\Monkey logs"));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnMonkeyLogs.setBounds(220, 525, 126, 30);
+		contentPane.add(btnMonkeyLogs);
 	}
 }
 
